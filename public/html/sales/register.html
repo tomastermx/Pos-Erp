@@ -22,6 +22,8 @@
 
   <body>
   <div id ="main" class="bg-light"> 
+
+
     
 
          <div class="row text-center">
@@ -59,7 +61,7 @@
             
             <div class="row  align-items-center">
               <div class="col-md gy-4 d-grid ">
-              <button class="btn btn-primary" type="submit">Enviar</button>
+              <button id="submitBtn" class="btn btn-primary" type="submit">Enviar</button>
             </div>
             </div>
 
@@ -72,9 +74,33 @@
 
           <div class="col"></div>
           
-        </div>
-              
- 
+         
+        <!-- Modal -->
+
+
+        <div id="saleModal" class="modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Se creará una Venta nueva</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p> Usted Esta a punto de Registrar una nueva venta</p>
+
+              </div>
+              <div class="modal-footer">
+                <button id="confirmSaleBtn" type="button" class="btn btn-success"> Aceptar</button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+               
+              </div>
+            </div>
+          </div>
+        </div>  
+
+          
+
+
       
 
     <script

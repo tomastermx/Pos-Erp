@@ -35,6 +35,13 @@
         <div class="col-sm d-grid gap-2 " >
           <button  type="submit"  id ="search" class="btn btn-outline-primary">Buscar</button>
         </div> 
+
+        <div class="col-sm d-grid gap-2 " >
+          <button  type="button"  id ="csv" class="btn btn-outline-primary">Descargar CSV</button>
+        </div> 
+
+
+
         </div>
       </form>     
 
@@ -54,9 +61,38 @@
 
           </tbody>
         </table>
+
+        <!--Modal Aqui --> 
+
+        <div id="csvModal" class="modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Exportar CSV</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <form>
+                  <select id="limit" class="form-select" aria-label="Default select example">
+                    <option selected> Número de registros de ventas</option>
+                    <option value="2">50</option>
+                    <option value="200">200</option>
+                    <option value="All">Todas</option>
+                  </select>
+                </form>
+              </div>
+              <div class="modal-footer">
+                <button id="csvBtn" type="button" class="btn btn-success" data-bs-dismiss="modal">Exportar Csv</button>
+          
+              </div>
+            </div>
+          </div>
+        </div>
+         <!--Termina Modal-->
+
+
        </div>
-      </div>
-      </div>
+
   
      
     </body>

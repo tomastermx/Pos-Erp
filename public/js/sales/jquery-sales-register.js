@@ -1,7 +1,9 @@
 $(function () {
   console.log("funcionando");
 
-  /// Get all stores /////////////
+  let sale;
+
+  /// Get all stores ///////////////////////////////////
 
   $.getJSON("/stores/all", (data) => {
     console.log(data);
@@ -13,7 +15,7 @@ $(function () {
     });
   });
 
-  ///// get all products //////
+  ///// get all products ///////////////////////////////
 
   $.getJSON("/products/all", (data) => {
     console.log(data);
@@ -44,8 +46,9 @@ $(function () {
     });
   });
 
-  ////////////// Public new Sale//////////////
+  ///////////////////////////////////////////////////////////
 
+  ////////////// Create  new Sale////////////////////////////
   $("#myform").on("submit", (event) => {
     event.preventDefault();
 
@@ -56,55 +59,51 @@ $(function () {
     const products = [];
 
     let invalid = 0;
-    let  nostore = 0;
-///////////////////////////////////Testint Input Entries///////////
+    let nostore = 0;
+    ///////////////////////////////////Testint Input Entries///////////
     for (let i = 0; i < inputs.length; i++) {
       if (isNaN(parseFloat(inputs[i].value)) && inputs[i].value !== "") {
+        $("#" + inputs[i].id).addClass("error");
 
-        $('#' + inputs[i].id ).addClass("error"); 
-        
-       invalid ++;
-       console.log(invalid); 
-        
+        invalid++;
+        console.log(invalid);
       } else if (!store) {
-       nostore ++;
-    
+        nostore++;
+      } else if (inputs[i].value && parseFloat(inputs[i].value) > 0) {
+        $("#" + inputs[i].id).removeClass("error");
 
-      } else if (inputs[i].value && inputs[i].value!==0) {
-        $('#' + inputs[i].id ).removeClass("error");
-         
         const item = { id: inputs[i].id, qty: parseFloat(inputs[i].value) };
         products.push(item);
       }
     }
-    
-    if(invalid > 0 ){
 
-      alert('Datos Inválidos');
-     } else if (nostore > 0 ){
-      alert('Se debe seleccionar una tienda');
-     } 
-
-
-
-    if (products.length === 0) {
-        alert('Venta vacía');
-        console.log(products);
-
-    } else if( products.lenght !==0) {
-      const sale = { store: store, ...products };
-      console.log(sale);
-      
-       $.post('/sales/new', sale, (data)=>{
-         console.log(data);
-
-       });
-
-
+    if (invalid > 0) {
+      alert("Datos Inválidos");
+    } else if (nostore > 0) {
+      alert("Se debe seleccionar una tienda");
+      $("#selection").addClass("error");
     }
 
+    if (products.length === 0) {
+      alert("Venta vacía");
+      console.log(products);
+    } else if (products.lenght !== 0) {
+      sale = { store: store, ...products };
+      console.log(sale);
 
+      $("#saleModal").modal("show");
+    }
   });
 
-  
+  //////////////////////////////////////////////////////////////////////////
+
+  ////////////////////////////Confirm new Sale//////////////////////////////
+
+  $("#confirmSaleBtn").on("click", () => {
+    $.post("/sales/new", sale, (data) => {
+      window.location.replace("http://localhost:3000/sales");
+    });
+  });
+
+  ///////////////////////////////////////////////////////////////////////////////7
 });

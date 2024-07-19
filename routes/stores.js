@@ -17,10 +17,17 @@ const store = new StoreService();
 
      }); 
 
+
+     router.get('/',(req,res,next)=>{
+      res.sendFile(path.join(__dirname, '../public/html/stores/', 'store.html'));
+      
+     }); 
+
    
-       router.get('/add',(req,res,next)=>{
+
+     router.get('/add',(req,res,next)=>{
               
-        res.sendFile(path.join(__dirname, '../public/html/stores/', 'register-store.html'));
+     res.sendFile(path.join(__dirname, '../public/html/stores/', 'register-store.html'));
       });
 
 

@@ -12,16 +12,18 @@ app.use(bodyParser.urlencoded({}));
 
 app.use(express.static('public'));
 
-
-const SalesRouter = require('./routes/sales');
 const indexRouter = require('./routes/index');
+const userRouter = require('./routes/users');
+const SalesRouter = require('./routes/sales');
 const  productsRouter = require('./routes/products');
 const  StoreRouter = require('./routes/stores');
 
 app.use('/', indexRouter);
+app.use('/users',userRouter );
 app.use('/sales', SalesRouter);
 app.use('/products',productsRouter);
 app.use('/stores', StoreRouter);
+
 
 app.listen(3000,()=>{console.log('connected to port 3000')});
 

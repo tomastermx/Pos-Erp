@@ -7,7 +7,7 @@ const ProductService = require('../controllers/products');
 const product = new ProductService();
 
    router.get('/', async (req,res,next)=>{
-
+    res.sendFile(path.join(__dirname, '../public/html/products/', 'products.html' ));
    });
 
 

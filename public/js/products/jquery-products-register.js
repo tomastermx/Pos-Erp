@@ -1,45 +1,72 @@
-$( function(){
+$(function () {
+  ///////////////////////////Submit Product Modal////////////////////////////////7
 
-    alert('funciondando');
+  // $("#submitMessageBtn").on("click", () => {
+  //  $("#submitModal").modal("show");
+  //
+  //  });
 
-     $('#productform').on('submit',(event)=>{
+  //////////////////////////////////////Submit Product to create///////////////////////////////7
 
-        event.preventDefault();
+  //  $("#productSubmitBtn").on("click", () => {
+  //    $("#productform").submit();
 
-        let name = $("#name").val();
-        let description =  $("#description").val();
-        let price =  $("#price").val();
-        
-          console.log(name);
-          console.log(description);
-          console.log(price);
+  //  $("#submitModal").modal("hide");
+  //  });
+
+  ////////////////////////////////////////////////////////////////////////////////////////////////
+  /////////////////////////////Create Product ////////////////////////////////////////////////////
+
+  $("#productform").on("submit", (event) => {
     
+    event.preventDefault();
+    let productname;
+    let description
+    let price;
 
+    if ($("#name").val().length < 2  ||  parseFloat($("#name").val()) ) {
+      
+      $("#name").addClass("error");
+      alert('Error con el nombre')
+      
+    } else {
 
-
-           if(name.split("").length < 2){
-            $("#name").addClass("error");
-            } else {
-            $("#name").removeClass("error");  
-          }
-           if(description.split("").length < 5 ){ 
-           $("#description").addClass("error");
-          } else { 
-            $("#description").removeClass("error");
-          } 
-           if(isNaN(parseFloat(price))){
-            $("#price").addClass("error");
-            }
-
-               
-
+      $("#name").removeClass("error");
+      
+       productname = $("#name").val();
          
-         // $.post()
+    }
+    if ($("#description").val().length < 5  || parseFloat($("#description").val()) ) {
+      
+      $("#description").addClass("error");
+       alert('Error con la descripcion');
+       
+    } else {
+        description = $("#description").val();
+        console.log(description);
 
-     });
+      $("#description").removeClass("error");
+    }
+    if (isNaN(parseFloat($("#price").val()))) {
+      alert('Error con el precio');
+      $("#price").addClass("error");
+
+    } else {
+      $("#price").removeClass("error");
+       price = $("#price").val();
+      
+      console.log(price);
+
+    } 
+
+      if(productname && description && price ){
+        $("#submitModal").modal("show");        
+      }                
+        
+   
+ 
+
+  });
 
 
-
-
-    
-})
+});

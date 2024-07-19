@@ -46,8 +46,9 @@ class SalesService {
     return sale;
   }
 
-  async find() {
-    const sale = await models.Sale.findAll({
+  async find(limit) {
+    console.log(limit+"sevice");
+    const sale = await models.Sale.findAll({ 
       include:  [{
         model: Product,
         through: {
@@ -55,7 +56,7 @@ class SalesService {
         },
 
         attributes: ["id", "name"], // Select product attributes to display
-      }, {model:  Store } ],
+      }, {model:  Store } ], order: [['create_at', 'DESC']], limit:limit
     });
 
     return sale;
