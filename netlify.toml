@@ -1,0 +1,5 @@
+[build]
+  command = "npm run build"  # Adjust this if you have a different build command
+  publish = "public"
+
+# No redirects needed for non-SPA
