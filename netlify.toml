@@ -1,3 +1,41 @@
 [build]
   command = "npm run start"  # Adjust this if you have a different build command
   publish = "public"
+
+
+  [[redirects]]
+
+   from = "/"
+   to = "/html/index.html"
+   status = 200
+ 
+
+  [[redirects]]
+
+  from = "/sales "
+  to = "/html/sales/sales.html"
+  status = 200
+
+  [[redirects]]
+
+  from = "/sales/add "
+  to = "/html/sales/register.html"
+  status = 200
+
+ [[redirects]]
+
+  from = "/products "
+  to = "/html/products/products.html"
+  status = 200
+
+ [[redirects]]
+
+  from = "/products/add "
+  to = "/html/products/register.html"
+  status = 200
+
+ [[redirects]]
+
+  from = "/stores"
+  to = "/html/stores/store.html"
+  status = 200
