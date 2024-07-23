@@ -1,5 +1,5 @@
 [build]
-  command = "npm run start"  # Adjust this if you have a different build command
+ 
   publish = "public"
 
 
