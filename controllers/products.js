@@ -27,8 +27,10 @@ class ProductService{
 
       }
 
-      async update(){
-
+      async update(id, changes){
+          const product = await this.findOne(id);
+          const updateproduct = await model.update(changes)
+          return updateproduct;
      }
 
 } 

@@ -8,8 +8,7 @@ const { models } = require('../lib/sequelize');
      }
 
      async create(data){
-        const saleitems = await models.SaleItems.create(data);
-        return saleitems;
+ 
      }
 
       async find(){

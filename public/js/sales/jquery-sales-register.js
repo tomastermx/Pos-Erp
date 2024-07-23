@@ -88,7 +88,8 @@ $(function () {
       alert("Venta vacía");
       console.log(products);
     } else if (products.lenght !== 0) {
-      sale = { store: store, ...products };
+
+      sale = { store: store,products };
       console.log(sale);
 
       $("#saleModal").modal("show");
@@ -100,9 +101,10 @@ $(function () {
   ////////////////////////////Confirm new Sale//////////////////////////////
 
   $("#confirmSaleBtn").on("click", () => {
-    $.post("/sales/new", sale, (data) => {
+     $.post("/sales/new", sale, (data) => {
       window.location.replace("http://localhost:3000/sales");
     });
+  
   });
 
   ///////////////////////////////////////////////////////////////////////////////7

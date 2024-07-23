@@ -11,22 +11,22 @@ class SalesService {
     console.log(data);
     console.log(data.store);
   
-    let totalSale = 0;
+      let totalSale = 0;
   
-   const newSale = await models.Sale.create({ totalAmount: 0 });
-   const store = await models.Store.findByPk(data.store);
+     const newSale = await models.Sale.create({ totalAmount: 0 });
+     const store = await models.Store.findByPk(data.store);
   
      
     
 
-    for (const dataProduct of data.products) {
+      for (const dataProduct of data.products) {
       console.log(dataProduct.id);
 
       const product = await models.Product.findByPk(dataProduct.id);
 
       console.log(product);
 
-      await models.SaleItems.create({
+        await models.SaleItems.create({
         SaleId: newSale.id,
         ProductId: product.id,
         quantity: dataProduct.qty,
@@ -38,7 +38,8 @@ class SalesService {
 
     newSale.update({ totalAmount: totalSale });
     newSale.update({StoreId:store.id});
-  
+      return newSale;   
+     
   }
 
   async findOne(id) {

@@ -42,7 +42,6 @@ router.post('/new', async (req,res,next)=>{
 
     const data  = req.body;
     
-    console.log(data);
     const newSale =  await sales.create(data);
 
    res.json(newSale);

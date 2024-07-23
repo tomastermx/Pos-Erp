@@ -1,4 +1,9 @@
 $(function () {
+  let productname;
+  let description
+  let price;
+
+
   ///////////////////////////Submit Product Modal////////////////////////////////7
 
   // $("#submitMessageBtn").on("click", () => {
@@ -20,9 +25,9 @@ $(function () {
   $("#productform").on("submit", (event) => {
     
     event.preventDefault();
-    let productname;
-    let description
-    let price;
+  
+
+    //////////////////////////Evaluate  productname
 
     if ($("#name").val().length < 2  ||  parseFloat($("#name").val()) ) {
       
@@ -36,6 +41,9 @@ $(function () {
        productname = $("#name").val();
          
     }
+
+    ////////////////////////////////////// Evaluate description//////
+
     if ($("#description").val().length < 5  || parseFloat($("#description").val()) ) {
       
       $("#description").addClass("error");
@@ -47,6 +55,9 @@ $(function () {
 
       $("#description").removeClass("error");
     }
+
+   /////////////////Evaluate price
+
     if (isNaN(parseFloat($("#price").val()))) {
       alert('Error con el precio');
       $("#price").addClass("error");
@@ -66,6 +77,24 @@ $(function () {
    
  
 
+  });
+
+  ////////////////////// Send Data to Server ///////////////////////77
+
+  $("#productSubmitBtn").on('click',()=>{
+    console.log(productname);
+    console.log(price);
+    console.log(description);
+
+    let product = {"name": productname, "description":description , "price":price }
+
+    $.post('/products/new',product,(data)=>{
+       console.log(data);
+       window.location.replace("http://localhost:3000/products");
+     });
+
+
+     
   });
 
 

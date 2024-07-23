@@ -1,42 +1,62 @@
 
  $(function(){
-
-
+   
+  let storename
+  let address
   
   
     $("#storeform").on("submit" , (event)=>{
-        
+ ///////////////////////// Handle Data///////////////////////7       
         
         event.preventDefault();
 
-
-        let storename
-        let address    
-
-        if( $("#storename").val().length < 2 ){
+        
+ / ///////////////////////Evaluate name///////////////////////     
+        if( $("#storename").val().length < 2  || parseInt($("#storename").val()) ){
 
           $("#storename").addClass("error");
         } else {
 
            $("#storename").removeClass("error");
-           let storename = $("#storename").val(); 
+           storename = $("#storename").val(); 
+          
         } 
+////////////////////////////Evaluate address//////////////////
 
-
-        if( $("#address").val().length < 3 ){
+        if( $("#address").val().length < 2  || parseInt($("#address").val()) ){
 
           $("#address").addClass("error");
+
         } else {
 
           $("#address").removeClass("error");
-          let address = $("#address").val();  
+           address = $("#address").val();
+           
         }
 
+           if(storename && address){
+            $("#storemodal").modal("show");
+           } else {
+             alert('Error en los datos');
+           } 
 
-        $("#storemodal").modal("show");
-
-
-
+          
     });
+
+      //////////// Send to Server///////////////////////////////////// 
+        $('#btnSavestore').on('click',( )=>{
+          
+          let store = {"name": storename , "street": address } 
+           
+           console.log(store);
+
+          $.post('/stores/new', store, (data)=>{
+            console.log(data);
+            
+            window.location.replace("http://localhost:3000/stores/");
+
+          });
+          
+        });
 
  })
