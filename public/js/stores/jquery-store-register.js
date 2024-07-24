@@ -53,7 +53,7 @@
           $.post('/stores/new', store, (data)=>{
             console.log(data);
             
-            window.location.replace("http://localhost:3000/stores/");
+            window.location.replace("/stores");
 
           });
           

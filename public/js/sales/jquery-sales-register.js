@@ -102,7 +102,7 @@ $(function () {
 
   $("#confirmSaleBtn").on("click", () => {
      $.post("/sales/new", sale, (data) => {
-      window.location.replace("http://localhost:3000/sales");
+      window.location.replace("/sales");
     });
   
   });

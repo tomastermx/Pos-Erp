@@ -1,41 +1,46 @@
 [build]
-    command = "npm run start" 
-  publish = "public"
+  publish = "public"  # Directory where your static files are located
 
-
+#Index
+[[redirects]]
+  from = "/"
+  to = "/html/index.html"
+  status = 200
+#Users
+[[redirects]]
+  from = "/users/dashboard"
+  to = "/html/users/user-main.html"
+  status = 200
+#Sales
   [[redirects]]
-
-   from = "/"
-   to = "/html/index.html"
-   status = 200
- 
-
-  [[redirects]]
-
-  from = "/sales "
+  from = "/sales"
   to = "/html/sales/sales.html"
   status = 200
 
   [[redirects]]
-
-  from = "/sales/add "
+  from = "/sales/add"
   to = "/html/sales/register.html"
   status = 200
-
- [[redirects]]
-
-  from = "/products "
+  
+#Products
+  [[redirects]]
+  from = "/products"
   to = "/html/products/products.html"
   status = 200
-
- [[redirects]]
-
-  from = "/products/add "
+  
+  [[redirects]]
+  from = "/products/add"
   to = "/html/products/register.html"
   status = 200
 
- [[redirects]]
-
+  #stores
+  
+  [[redirects]]
   from = "/stores"
   to = "/html/stores/store.html"
+  status = 200
+
+    [[redirects]]
+  from = "/stores/add"
+  to = "/html/stores/register-store.html"
   status = 200
