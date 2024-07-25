@@ -39,5 +39,17 @@ const product = new ProductService();
   });
 
 
+     router.put('/update', async(req,res,next)=>{
+        
+
+        const { id , updates } = req.body
+
+       const updateProduct = await product.update(id, updates);
+        console.log(updateProduct);
+        res.json(updateProduct); 
+
+    });
+
+
 
 module.exports = router;

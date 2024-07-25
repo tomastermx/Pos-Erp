@@ -25,6 +25,8 @@ app.use('/products',productsRouter);
 app.use('/stores', StoreRouter);
 
 
+
+////User  port variable for heroku
 const PORT = process.env.PORT || 3000;
 
 
