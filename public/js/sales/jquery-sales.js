@@ -1,5 +1,14 @@
 $(function () {
-  ////Get all stores///////////////////////////////
+
+   //////////////////Show spinner first////////////////////////////////////
+
+    let spinning = '<div id="spinner" class="d-flex justify-content-center"><div class="spinner-border" style="width: 7rem; height: 7rem;"  role="status"><span class="visually-hidden">Loading...</span></div> </div>'
+    $('#maincontent').append('<h2>LOADING</h2>');
+    $('#maincontent').append(spinning);
+    
+    $('#maintable').hide();
+
+  ////Get all stores////////////////////////////////////////////////////////
 
   $.getJSON("/stores/all", (data) => {
     $.each(data, (i, value) => {
@@ -9,7 +18,7 @@ $(function () {
     });
   });
 
-  /// Get all products
+  /// Get all products//////////////////////////
 
   $.getJSON("/products/all", (data) => {
     $.each(data, (i, value) => {
@@ -29,6 +38,10 @@ $(function () {
 
     $("tr").append(totalrow);
   });
+
+  $("#spinner").remove();
+  $("h2").remove();
+  $('#maintable').show();
 
   //////// Get all Orders /////////////////////////////////////////777
 

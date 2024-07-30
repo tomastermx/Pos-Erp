@@ -30,7 +30,7 @@ const StoreSchema = {
 
 class Store extends Model {
   static associate(models) {
-    this.hasMany(models.Sale)
+    this.hasMany(models.Sale ,{ onDelete: 'NULL',  onUpdate: 'CASCADE' } )
     this.belongsToMany(models.Product,{through:'Inventory'});
   }
 

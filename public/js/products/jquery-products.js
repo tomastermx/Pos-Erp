@@ -2,13 +2,13 @@
 
   $(function(){
   
-    let id
+  
 
-    let price
+    let changes={ }   
 
-    let updateId
+    let updateId =  { }
 
-    let updateData
+    let updateData = {}
     
     $.getJSON('/products/all', (data)=>{
         
@@ -17,7 +17,7 @@
             
             newRow.setAttribute("id" ,  value.id); 
 
-            newRow.innerHTML = '<td>'+value.name +'</td> <td>'+ value.description +'</td> <td><input type="text" class="form-control" value=" '+ value.price + '">   </td> <td> <button type="button" class="btn btn-success update">Actualizar</button> </td>'  
+            newRow.innerHTML = '<td>'+value.name +'</td> <td> <input name="description"  type="text" class="form-control dscrptn " value=" '+ value.description + '"> </td><td><input  name="price" type="text" class="form-control prc" value=" '+ value.price + '">   </td> <td> <button type="button" class="btn btn-success update">Actualizar</button> </td>'  
             
             console.log(value);
 
@@ -39,49 +39,64 @@
 
 
       $("body").on("click", "button.update", function() {
-        console.log($(this).closest('tr').attr('id'))
-         
-        console.log($(this).closest('tr').find('input').val())
-         
+
         
-
-
-        if( $(this).closest('tr').find('input').hasClass("change")){
+        let $row = $(this).closest('tr');
+        
+        let id = $row.attr('id');
+        
+        updateId['id'] = id;         
+        
+   
+        if( $(this).closest('tr').find('input.prc').hasClass("change")){
  
-          id =  $(this).closest('tr').attr('id');
-          price = $(this).closest('tr').find('input').val();
-                
-          updateId={"id":id}            
-          
-          changes = {"price":price}
-
-
          
+          let price = $row.find('input.prc').val();       
+              
+          changes['price'] = price
+          console.log(changes);
+  
+        } 
+
+    
+        if( $row.find('input.dscrptn').hasClass("change")){
+           
+          let description = $row.find('input.dscrptn').val();
           
-          $("#modal").modal("show");   
+          changes['description'] = description;
+           
+          
+          console.log(changes);
+        }     
 
-        } else {
 
-          alert('No se modificó el precio');
 
-        }
+         if( changes.price || changes.description){
+          console.log('buena validación');
+          console.log(changes);    
+          $("#modal").modal("show");
 
- 
+         } else { console.log('No se encontraron modificaciones'); }
+        
+         
 
-      }); 
+      });
+      
+      
+  //////////////////////// Send to server////////////////////////////7    
      
        $("#saveBtn").on("click", ()=>{
           
-           updateData= {...updateId , updates:{...changes}}         
+           updateData = {...updateId , updates:{...changes}}         
           
-           console.log('funcionando saVEbTN');
-           console.log(updateData);
+           
+          console.log(updateData);
 
            $.ajax({
             url: '/products/update',
             type: 'PUT',
             data: updateData,
-            success: function (result) {
+            success: function () {
               
               $("#modal").modal("hide"); 
                

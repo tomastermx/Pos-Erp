@@ -23,13 +23,17 @@ const { models } = require("../lib/sequelize");
         
      }
 
-     async update(){
-         const ustore = await models.Store.update();
-         return ustore;
-     }
+       async update(id,updates){
+          console.log(updates)
+          const store =   await this.findOne(id);
+          const updatestore =  await store.update(updates);
+          return updatestore
+      }
 
-     async delete(){
-
+      async delete(id){
+       const dstore = await this.findOne(id);
+       dstore.destroy();
+       return dstore;
      }
  }
 

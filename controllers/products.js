@@ -36,6 +36,12 @@ class ProductService{
           return updateproduct;
      }
 
+      async delete(id){
+          const product = await this.findOne(id);
+           await product.destroy();
+           return product
+      }
+
 } 
 
 module.exports = ProductService;

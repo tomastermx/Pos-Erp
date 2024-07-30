@@ -41,8 +41,8 @@ productSchema = {
 
 class Product extends Model {
   static associate(models){
-    this.belongsToMany(models.Sale,{through:'SaleItems'});
-    this.belongsToMany(models.Store,{through:'Inventory'});
+    this.belongsToMany(models.Sale,{through:'SaleItems'},{ onDelete: 'NULL',  onUpdate: 'CASCADE' },{ foreignKey: { allowNull: true } });
+    this.belongsToMany(models.Store,{through:'Inventory'},{ onDelete: 'NULL',  onUpdate: 'CASCADE' },{ foreignKey: { allowNull: true }});
     }
 
   static config(sequelize) {

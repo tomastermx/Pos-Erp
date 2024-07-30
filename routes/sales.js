@@ -126,7 +126,8 @@ router.post('/new', async (req,res,next)=>{
         res.status(500).send('Error al descargar el archivo.');
       }
   
-      // Opcional: Eliminar el archivo después de la descarga
+      // Delete file
+      fs.unlinkSync(filePath);   
       
     });
         

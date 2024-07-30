@@ -4,8 +4,7 @@
   "description": "erp",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"   
-
+    "start": "node index.js"
   },
   "keywords": [
     "erp",
@@ -20,6 +19,7 @@
     "json2csv": "^6.0.0-alpha.2",
     "mysql2": "^3.9.7",
     "nodemon": "^3.1.0",
+    "passport-local": "^1.0.0",
     "sequelize": "^6.37.3"
   }
 }

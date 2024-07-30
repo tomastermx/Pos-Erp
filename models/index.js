@@ -4,6 +4,7 @@
   const {Product, productSchema} = require('../models/product');
   const {SaleItems,SaleItemsSchema} = require('./saleitems.js');
   const {Store, StoreSchema} = require('../models/store');
+  
 
  function setupModels(sequelize){
 

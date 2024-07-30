@@ -48,7 +48,7 @@ class SalesService {
   }
 
   async find(limit) {
-    console.log(limit+"sevice");
+    console.log(limit);
     const sale = await models.Sale.findAll({ 
       include:  [{
         model: Product,
@@ -62,6 +62,9 @@ class SalesService {
 
     return sale;
   }
+
+
+  
 }
 
 

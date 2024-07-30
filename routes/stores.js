@@ -8,14 +8,6 @@ const StoreService = require('../controllers/stores');
 
 const store = new StoreService();
 
-  router.get('/all', async(req,res,next)=>{
-          
-             const stores = await store.find();    
-
-             res.json(stores);
-
-
-     }); 
 
 
      router.get('/',(req,res,next)=>{
@@ -29,6 +21,18 @@ const store = new StoreService();
               
      res.sendFile(path.join(__dirname, '../public/html/stores/', 'register-store.html'));
       });
+
+
+      
+  router.get('/all', async(req,res,next)=>{
+          
+    const stores = await store.find();    
+
+    res.json(stores);
+
+
+}); 
+ 
 
 
 
@@ -45,15 +49,26 @@ const store = new StoreService();
 
     router.get('/id:', async (req, res, next) => {
     
-       let Onestore = await store.findOne();
+       let Onestore = await store.find();
 
        res.json(Onestore);
     });
 
 
-    router.patch('/id:',async(req,res,next)=>{
+    router.put('/update', async(req,res,next)=>{
+      
+       const {id, updates} = req.body;
+         
+       
 
+       const updatestore =  await store.update(id, updates);
+       
+       res.json(updatestore);
+    
     });
+
+    
+
     
     router.delete('/id:',async(req,res,next)=>{
     

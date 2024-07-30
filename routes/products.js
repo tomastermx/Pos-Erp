@@ -43,9 +43,10 @@ const product = new ProductService();
         
 
         const { id , updates } = req.body
+        console.log(req.body);
 
        const updateProduct = await product.update(id, updates);
-        console.log(updateProduct);
+      
         res.json(updateProduct); 
 
     });
