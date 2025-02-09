@@ -9,6 +9,8 @@ const OrderService = require('../controllers/orders');
 
 const ProductService = require('../controllers/products');
 
+const {checkAuthWeb, checkApi,checkAdminWeb} = require('../middleware/auth');
+
 const order = new OrderService();
 
 const products = new ProductService();
@@ -150,7 +152,21 @@ const products = new ProductService();
 
       
 
+       ////////////////////////////////////////////////////Delete Order////////////////////////
+       
+       
+        router.delete('/delete/:id', async(req,res,next)=>{
+                    
+              
+              let id = req.params.id
 
+              let deletedOrder = await order.delete(id);
+
+              res.status(201).json(deletedOrder);
+             
+
+
+       });
 
 
 

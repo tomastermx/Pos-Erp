@@ -154,14 +154,18 @@ $(function(){
                 updateData = {...updateId , updates:{...changes}} 
                 
                 $.post('/users/update', updateData, (data)=>{
-                  console.log(data);
-                  
-                 
-      
-                });
+     
+                })
    
-
+               .done(()=>{
+                  $("#moreEditBtn").modal('hide');
+                  alert('Cambio exitoso de contraseña');
                
+               })              
+                 
+               .fail(()=>{
+                   alert('Error');
+               })
 
             }
 

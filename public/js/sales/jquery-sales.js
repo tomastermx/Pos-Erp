@@ -356,6 +356,9 @@ $(function () {
     ///////////////////////////////////////Cancel Sale////////////////////////////////////////////////7
     
       $(document).on('click', '.btn-outline-danger', function() {
+      
+        console.log($(this).prop('disabled'));
+
       // Lógica para el botón cancelar
      // alert('Botón Cancelar clicado, ID: ' +
         cancelId = $(this).attr('id');
@@ -363,7 +366,7 @@ $(function () {
       $("#cancelModal").modal("show");
             
          
-      //    $(this).closest('tr').remove();
+        
     });
      
       ///////////////////////////////Confirm Cancelation//////////////////////7

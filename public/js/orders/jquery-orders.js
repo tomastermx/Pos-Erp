@@ -1,5 +1,8 @@
     $(function(){
     
+
+      let cancelId; 
+
       let urlParams = new URLSearchParams(window.location.search);
 
       const page = urlParams.get('page') || 1;    
@@ -14,10 +17,16 @@
            
             const row ='<th id="' + value.id + '" scope="col">' + value.name + " " + "lts." +"</th>";
     
+
           $("tr").append(row);
 
         });
          
+         const tail = '<th>Acción</th>'
+
+         $("tr").append(tail);
+
+
     });
 
       // Get Orders //////////////////////7
@@ -62,8 +71,10 @@
 
 
 
-
+            ///////////////////////////////////////////////////////Populate Orders////////////7
               $.each(data,(i,value)=> {
+
+                  if(value.Products && value.Store){                
 
                  let newRow = document.createElement("tr"); 
 
@@ -81,7 +92,7 @@
                    
           
                 
-                 for (let k = 3; k < head.length ; k++) {
+                 for (let k = 3; k < head.length -1 ; k++) {
     
                   const header = head[k];
                   const rowData = document.createElement("td");
@@ -90,11 +101,14 @@
                   newRow.appendChild(rowData);
                 }
 
-
-
+                 newRow.innerHTML +=  '<td> <button type="button" id=' + value.id +' class="btn btn-outline-danger">Cancelar</button> </td>' 
+                
 
                  $("#maintable").append(newRow);
-                 
+
+                 } 
+
+
                  ////Progress bar
                  setTimeout(()=>{ $('.progress-bar').css("width", "100%"); }, 900); 
                  setTimeout(()=>{ $('.progress-bar').css("width", "3%"); }, 1800); 
@@ -126,5 +140,53 @@
 
         });
        
+
+        //////////////////////Cancel Order///////////////////////////////////////////////////
+
+        $(document).on('click', '.btn-outline-danger', function() {
+               
+          cancelId = $(this).attr('id');
+
+        
+
+          $("#OrdercancelModal").modal('show');
+
+        })
+
+       //////////////////////Confirm Cancel //////////////////////////////// 
+
+         $("#confirmCancelBtn").on('click',()=>{
+                  
+                  
+
+          $.ajax({
+            url: '/orders/delete/' + cancelId,
+            type: 'DELETE',
+            success: function(result) {
+             
+              console.log(result);
+
+              document.getElementById(cancelId).closest('tr').remove();                 
+              
+            },
+            
+            error: function(xhr, status, error) {
+              // Esta función se ejecuta si hubo un error en la solicitud
+              console.error('Error al eliminar el registro:', error);
+              alert('Hubo un error al eliminar el registro. Inténtalo nuevamente.');
+          }
+
+
+
+    
+                     
+
+        });     
+          
+        $("#OrdercancelModal").modal('hide');   
+ 
+         
+
+        })
        
   });

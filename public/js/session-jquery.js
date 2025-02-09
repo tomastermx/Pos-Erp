@@ -1,13 +1,54 @@
          
      
-  
+        let session;
+ 
 
-  $(()=>{
-          
-     
+       $(()=>{
+
         
+   
+         ///////////////////////////////Get User Data//////////////////////7   
+        
+        async function getUserRole() {
+        let  userdata = await $.getJSON('/users/user-data/');
+            
+        console.log(userdata);
+
+        if(userdata.role == 'seller'){
+          
+        let menu = document.querySelectorAll(".onlyadmin");
+          
        
+          
+            console.log(userdata.role);
+ 
+           menu.forEach((element)=>{
+
+           element.classList.add("disabled");
            
+           
+           })
+
+          }
+           
+   
+         }
+          
+
+          getUserRole(); 
+     
+
+         ///////////////////////////// menu Buttons////////////////////////////////////
+
+          
+        
+
+
+
+
+          
+      /////////////////////////////////////////////////////User data//////////////
+
         $.getJSON('/users/user-data/',(data)=>{
 
           console.log(data);  

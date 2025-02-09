@@ -50,21 +50,21 @@ class userService {
          console.log('password' + updates.password );
          
          const salt =  await bcrypt.genSalt(8);
-         const securepass = await bcrypt.hash(password,salt);
+         const securepass = await bcrypt.hash(updates.password,salt);
 
-         console.log(securepass);
+         console.log(securepass);    
          
-         updates.passpord  =securepass;
-                
+         
+         user.update({password:securepass});
+
+         console.log(user.password);
 
        }
 
      
        
        
-       user.update(updates);
 
-       console.log(user);
 
        return user;
 

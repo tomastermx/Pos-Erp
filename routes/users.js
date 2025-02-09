@@ -32,7 +32,8 @@ router.get('/dashboard',checkAuthWeb ,  (req,res,next)=>{
    router.get('/user-data', checkApi, (req,res,next)=>{
               
           const user =  req.session.user;
-        
+         
+         
           
           res.json(user);
      

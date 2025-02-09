@@ -47,6 +47,17 @@ class OrderService{
 
      } 
 
+         
+      
+      async findOne(id){
+             
+           const Order = await models.Order.findByPk(id,{include:{model:Product, through:{attributes:["quantity"]} }});
+           return Order;
+
+      }
+ 
+
+
       async find(page,limit){
 
     
@@ -81,7 +92,37 @@ class OrderService{
       }  
 
 
-     async delete(){
+  /////////////////////////////////////DELETE ORDERS//////////////////////////////////////7
+
+      async delete(id){
+           
+         const delOrder = await  this.findOne(id);
+
+        
+
+         const  inventory = await models.Inventory.findAll({where:{StoreId:delOrder.StoreId}}); 
+        
+          for( const orderProduct of delOrder.Products){
+       
+            
+                console.log(orderProduct.id);
+                
+                const InventoryItem = inventory.find(item => item.ProductId === orderProduct.id);
+
+              
+                const newAmount =  InventoryItem.quantity - orderProduct.OrderItems.quantity;
+
+                InventoryItem.update({quantity:newAmount});
+
+                console.log(newAmount);
+             
+          }
+
+
+
+        delOrder.destroy(); 
+
+         return delOrder;
 
      }
     
