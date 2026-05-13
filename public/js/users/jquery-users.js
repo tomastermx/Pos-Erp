@@ -98,14 +98,15 @@ $(function(){
           $("#saveBtnA").on('click',()=>{
           
             updateData = {...updateId , updates:{...changes}} 
-   
+              
+             console.log(updateData);
             
             $.post('/users/update', updateData, (data)=>{
                console.log(data);
                
               
    
-             });
+             }).done(()=>{ console.log('datos guardados')});
 
           });
 

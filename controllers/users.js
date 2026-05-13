@@ -44,32 +44,38 @@ class userService {
     
     async update(id, updates){
           
+         
+
          const user = await this.findOne(id);
 
-       if(updates.password){
-         console.log('password' + updates.password );
-         
-         const salt =  await bcrypt.genSalt(8);
-         const securepass = await bcrypt.hash(updates.password,salt);
+          const data = {};
 
-         console.log(securepass);    
-         
-         
-         user.update({password:securepass});
+           if (updates.password) {
+           const salt = await bcrypt.genSalt(8);
+          data.password = await bcrypt.hash(updates.password, salt);
+          }
 
-         console.log(user.password);
+       // 👤 firstname
+       if (updates.firstname) {
 
+       console.log(updates.firstname); 
+       data.firstname = updates.firstname;
        }
 
-     
-       
-       
+       // 👤 lastname
+      if (updates.lastname) {
+       data.lastname = updates.lastname;
+      }
 
-
+       // 🚀 Update
+       await user.update(data);
+        
        return user;
 
 
     }
+
+
 
 }
   
