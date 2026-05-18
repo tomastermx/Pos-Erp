@@ -35,6 +35,9 @@ class OrderService{
 
              const InventoryItem = inventory.find(item=> item.ProductId === dataProduct.id);
 
+             console.log("Inventory:", inventory);
+             console.log("Searching:", dataProduct.id);
+
              const newInvAmount =  +InventoryItem.quantity +  +dataProduct.qty;
                
              InventoryItem.update({quantity:newInvAmount});

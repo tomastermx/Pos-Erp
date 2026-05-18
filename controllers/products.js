@@ -14,6 +14,21 @@ class ProductService{
           
         const newProduct = await models.Product.create(data);
         console.log(newProduct);
+       
+        // ✅ For every store, add product  0
+        const stores = await models.Store.findAll();
+
+        for(const store  of stores){
+            
+        await models.Inventory.create({
+        StoreId: store.id,
+        ProductId: newProduct.id,
+        quantity: 0
+         });
+
+
+        }
+ 
         return newProduct;
 
     }
